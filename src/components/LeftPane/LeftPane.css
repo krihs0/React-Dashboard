@@ -1,0 +1,53 @@
+.dashboard__wrapper{
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: -1rem 0 5rem 0 rgba(0,0,0,0.4);
+}
+
+.dashboard__nav{
+
+}
+
+.dashboard__ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.dashboard__li{
+
+}
+
+.dashboard__link{
+    display: flex;
+}
+
+.dashboard__message{
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 80%;
+    transform: translateY(-8px);
+    background: hsl(0, 100%, 60%);
+}
+
+.dashboard__button{
+    width: 18rem;
+    height: 8rem;
+    background: hsl(350, 79%, 54%);
+    font-size: 100%;
+    font-family: sans-serif;
+    border: none;
+    transition: 2s all;
+}
+
+.dashboard__button:hover{
+    cursor: pointer;
+    filter: hue-rotate(-10deg);
+}
