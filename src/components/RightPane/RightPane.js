@@ -1,22 +1,16 @@
+import Placeholder from "../Placeholder/Placeholder";
 import ProductCard from "../ProductCard/ProductCard";
 import"./RightPane.css";
 
 const RightPane = (props) =>{
-    let addProduct = () =>{
-        props.onButtonClicked();
-    }
-
+    
     let onCardClicked = (idFromCard) =>{
-        console.log("dadada " + idFromCard)
+        props.onProductCardClicked(idFromCard);
     }
 
     let productCardsToBeRendered = props.productCards.map(product =>{
         if(product.name === "Placeholder"){
-            return( <li key={product.id} className="productsList__item">
-                <button onClick={addProduct} className="productsList__button">{props.buttonSymbol || "*"}</button>
-                <p className="productsList__text">{props.buttonText}</p>
-                </li>
-            );
+            return <Placeholder onCardClicked={onCardClicked} id={product.id} buttonSymbol="+" buttonText="Voeg product toe"/>
         }
         return <ProductCard onCardClicked={onCardClicked} key={product.id} id={product.id} name={product.name} image={product.img}/>
 
