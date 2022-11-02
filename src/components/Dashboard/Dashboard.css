@@ -7,3 +7,10 @@
     border-radius: 2rem;
 
 }
+
+@media screen and (max-width: 850px){
+    .dashboard{
+        display:  flex;
+        flex-direction: column;
+    }
+}

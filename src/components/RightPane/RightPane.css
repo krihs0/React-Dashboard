@@ -30,6 +30,12 @@
     flex-direction: column;
     gap: 2rem;
     position: relative;
+    transition: 0.8s all;
+}
+
+.productsList__item--gray:hover{
+    cursor: pointer;
+    filter: grayscale(1);
 }
 
 .productsList__button{
@@ -72,4 +78,10 @@
 .productsList__item:hover .productsList__button ,.productsList__button:hover{
     cursor: pointer;
     filter: hue-rotate(-10deg);
+}
+
+@media screen and (max-width: 450px){
+    .header__h1{
+        font-size: 200%;
+    }
 }

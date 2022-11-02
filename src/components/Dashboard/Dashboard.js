@@ -1,38 +1,28 @@
 import LeftPane from "../LeftPane/LeftPane";
 import RightPane from "../RightPane/RightPane";
 import "./Dashboard.css";
-import redroses from "../../img/redroses.jpg";
-import sunflowers from "../../img/sunflowers.jpg";
-import poppy from "../../img/poppy.jpg";
-import daisy from "../../img/daisy.jpg";
-import dandelions from "../../img/dandelions.jpg";
-import defaultImage from "../../img/default.png";
 import React from "react";
 import Popup from "../Popup/Popup";
+import productsObject from "../../data/products";
+import chooseImage from "../../helpers/chooseImage";
+import navigationListItemsObject from "../../data/navigationListItems";
 
 class Dashboard extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {productCards: [], open: true};
+        this.state = {
+            productCards: [],
+            open: true,
+            cardClicked: {},
+            editMode: false
+        };
     }
 
 
     componentDidMount(){
-        let productCards =[
-            {
-                name: "Placeholder"
-            },
-            {
-                name: "red roses",
-                img: redroses
-            },
-            {
-                name: "sunflowers",
-                img: sunflowers
-            }
-        ];
-        this.setState({productCards: productCards})
+        
+        this.setState({productCards: productsObject.products})
     }
 
     onButtonClicked =() =>{
@@ -40,31 +30,12 @@ class Dashboard extends React.Component{
     }
 
     addButtonClicked = (inputFromPopup) =>{
-        let toBeAddedImage;
-        switch(inputFromPopup){
-            case("Daisy"):
-                toBeAddedImage = daisy;
-                break;
-            case("Dandelions"):
-                toBeAddedImage = dandelions;
-                break;
-            case("Poppy"):
-                toBeAddedImage = poppy;
-                break;
-            case("Sunflowers"):
-                toBeAddedImage = sunflowers;
-                break;
-            case("Red Roses"):
-                toBeAddedImage = redroses;
-                break;
-            default:
-                toBeAddedImage = defaultImage;
-                break;
-        }
+        let imageFromHelper = chooseImage(inputFromPopup);
         let toBeAdded = [
             {
+                id: this.state.productCards.length + 1,
                 name: inputFromPopup,
-                img: toBeAddedImage
+                img: imageFromHelper
             }
         ]
 
@@ -74,41 +45,50 @@ class Dashboard extends React.Component{
             open: !this.state.open
         })
     }
-    
 
-    render(){
-        let navigationListItems =
-        [
-            {
-                name: "Home",
-                message: 0,
-            },
-            {
-                name: "Facturen",
-                message: 3,
-            },
-            {
-                name: "Bestellingen",
-                message: 0,
-            },
-            {
-                name: "Retour",
-                message: 1,
-            },
-            {
-                name: "Contact",
-                message: 2,
+    editButtonClicked =(inputFromPopup)=>{
+        console.log(inputFromPopup)
+        let productCards = this.state.productCards;
+        let newState = productCards.map(product => {
+            if(this.state.cardClicked.id === product.id){
+                product.name = inputFromPopup;
+                return product;
+            }else{
+                return product;
             }
-        ];
+        });
+        this.setState({productCards: newState, open: true})
+    }
+
+    onCardClicked =(idFromCard) =>{
+        if(this.state.productCards[idFromCard - 1].name === "Placeholder"){
+            this.setState({
+                editMode: false,
+                open: !this.state.open,
+                cardClicked: this.state.productCards[idFromCard -1]    
+            });
+            return;
+        }
+        this.setState({
+            editMode: true,
+            open: !this.state.open,
+            cardClicked: this.state.productCards[idFromCard -1]
+        })
         
+        
+       
+    }
+    
+    render(){
         if(this.state.open === true){
             return(
                 <article className="dashboard">
                     <LeftPane
-                        navigationListItems={navigationListItems}
+                        navigationListItems={navigationListItemsObject}
                         buttonText="Go Premium"
                     />
                     <RightPane
+                        onProductCardClicked={this.onCardClicked}
                         onButtonClicked={this.onButtonClicked}
                         productCards={this.state.productCards}
                         headerText="Mijn Producten"
@@ -118,7 +98,7 @@ class Dashboard extends React.Component{
                 </article>
             );
         }
-        return <Popup addButtonClicked={this.addButtonClicked}/>
+        return <Popup editButtonClicked={this.editButtonClicked} editMode={this.state.editMode} cardClicked={this.state.cardClicked} addButtonClicked={this.addButtonClicked}/>
     };
 }
 

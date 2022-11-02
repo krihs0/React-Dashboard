@@ -51,3 +51,12 @@
     cursor: pointer;
     filter: hue-rotate(-10deg);
 }
+
+@media screen and (max-width: 850px){
+    .dashboard__button{
+        margin: 5rem auto;
+    }
+    .dashboard__ul{
+        align-items: center;
+    }
+}
