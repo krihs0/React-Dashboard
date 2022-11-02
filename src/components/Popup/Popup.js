@@ -8,8 +8,9 @@ class Popup extends React.Component{
     }
 
     componentDidMount(){
-            this.setState({input: this.props.cardClicked.name})
-        
+            if(this.props.cardClicked.name !== "Placeholder"){
+                this.setState({input: this.props.cardClicked.name})
+            }
     }
 
     input = (event) =>{
@@ -23,7 +24,7 @@ class Popup extends React.Component{
     }
 
     editProducts =() =>{
-        
+        this.props.editButtonClicked(this.state.input);
     }
 
     render(){

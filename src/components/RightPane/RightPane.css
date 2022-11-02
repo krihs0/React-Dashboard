@@ -79,3 +79,9 @@
     cursor: pointer;
     filter: hue-rotate(-10deg);
 }
+
+@media screen and (max-width: 450px){
+    .header__h1{
+        font-size: 200%;
+    }
+}
