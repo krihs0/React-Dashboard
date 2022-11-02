@@ -40,6 +40,10 @@ class Dashboard extends React.Component{
             open: !this.state.open
         })
     }
+
+    onCardClicked =() =>{
+        this.setState({open: !this.state.open})
+    }
     
     render(){
         if(this.state.open === true){
@@ -50,6 +54,7 @@ class Dashboard extends React.Component{
                         buttonText="Go Premium"
                     />
                     <RightPane
+                        onCardClicked={this.onCardClicked}
                         onButtonClicked={this.onButtonClicked}
                         productCards={this.state.productCards}
                         headerText="Mijn Producten"

@@ -1,8 +1,13 @@
+import ProductCard from "../ProductCard/ProductCard";
 import"./RightPane.css";
 
 const RightPane = (props) =>{
     let addProduct = () =>{
         props.onButtonClicked();
+    }
+
+    let onCardClicked = (idFromCard) =>{
+        console.log("dadada " + idFromCard)
     }
 
     let productCardsToBeRendered = props.productCards.map(product =>{
@@ -13,14 +18,8 @@ const RightPane = (props) =>{
                 </li>
             );
         }
-        return(
-            <li key={product.id} className="productsList__item">
-                <img className="productsList__img" src={product.img} alt={product.name} />   
-                <div className="productsList__fade">
-                <p className="productsList__imgText">{product.name}</p>
-                </div>
-            </li>
-        );
+        return <ProductCard onCardClicked={onCardClicked} key={product.id} id={product.id} name={product.name} image={product.img}/>
+
     });
     return(
         <section className="productsWrapper">
