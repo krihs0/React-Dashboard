@@ -4,6 +4,8 @@
     flex-direction: column;
     justify-content: space-between;
     box-shadow: -1rem 0 5rem 0 rgba(0,0,0,0.4);
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
 }
 
 .dashboard__nav{
@@ -53,10 +55,14 @@
 }
 
 @media screen and (max-width: 850px){
-    .dashboard__button{
-        margin: 5rem auto;
+    .dashboard__wrapper{
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 2rem;
     }
     .dashboard__ul{
         align-items: center;
+    }
+    .dashboard__button{
+        margin: 5rem auto;
     }
 }
